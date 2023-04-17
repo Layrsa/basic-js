@@ -16,6 +16,22 @@ function getSeason(date = 'empty') {
     return 'Unable to determine the time of year!'
   }
 
+  if (!date
+    || typeof date !== 'object'
+    || typeof date.getMonth !== "function"
+    || !(date instanceof Date)) {
+    throw new Error('Invalid date!');
+  }
+
+  try {
+    const dateCheck = new Date(date.toString());
+    if (dateCheck.getFullYear() !== date.getFullYear()) {
+      throw new Error('Invalid date!');
+    }
+  } catch (e) {
+    throw new Error('Invalid date!');
+  }
+
   if(date instanceof Date) {
 
       let m = date.getMonth();
